@@ -69,8 +69,7 @@ func run(_ *cobra.Command, _ []string) error {
 	if err != nil {
 		return err
 	}
-	writer := os.Stdout
-	fmt.Fprint(writer, string(bytes))
+	fmt.Fprint(os.Stdout, string(bytes))
 
 	return nil
 }
