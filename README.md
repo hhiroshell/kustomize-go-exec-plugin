@@ -5,8 +5,7 @@ Sample kustomize exec plugins written in Go.
 Kustomize supports two types of plugins (Go / Exec), but the Go plugin is "[very annoying](https://github.com/kubernetes-sigs/kustomize/issues/3574)" because it is realized using the Go plugin system.
 This repository is trying to write some Kustomize exec plugins in Go.
 
-What plugins this repository has
----
+This repository contains the following simple plugins:
 
 - Secret Generator:
     - Generates a manifest of kubernetes secret. You can specify the secret name, namespace and literals(key-value pairs)
