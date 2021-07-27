@@ -50,7 +50,7 @@ Flags:
 
 All options are available by writing them in the `argsOneLiner` field of the plugin’s configuration file referenced from kustomization.yaml.
 
-- plugin's configuration file
+- plugin's configuration file (secret-generator.yaml)
 
 ```yaml
 apiVersion: hhiroshell.github.com/v1
