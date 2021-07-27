@@ -23,19 +23,17 @@ var (
 
 func execute() {
 	rootCmd := &cobra.Command{
-		Use:   "kustomize-go-exec-plugin",
-		Short: "Kustomize Go Exec Plugin is a sample kustomize exec plugin written in Go",
-		Long: `Kustomize Go Exec Plugin is a sample kustomize exec plugin written in Go.
-                Kustomize supports two types of plugins (Go / Exec), but Go plugin is "quite annoying" because it is
-                build on the Go plugin system.
-                So this repository is trying to write a Kustomize exec plugin in Go`,
+		Use:   "SecretGenerator",
+		Short: "Kustomize exec plugin that generates a kubernetes secret",
+		Long: `Kustomize exec plugin that generates a manifest of kubernetes secret written in yaml format.
+You can specify the secret name, namespace and literals(key-value pairs) of the data field, via CLI flags.`,
 		RunE: run,
 	}
 
 	rootCmd.Flags().StringVar(&name, "name", "", "Name of the generated Secret")
 	rootCmd.MarkFlagRequired("name")
 	rootCmd.Flags().StringVar(&namespace, "namespace", "default", "Namespace of the generated Secret")
-	rootCmd.Flags().StringArrayVar(&literals, "literal", nil, "Literal key-value pairs used as data of the Secret")
+	rootCmd.Flags().StringArrayVar(&literals, "literal", nil, "Literal key-value pairs used as data of the Secret. (e.g. --literal key=value)")
 	rootCmd.MarkFlagRequired("literal")
 
 	err := rootCmd.Execute()
