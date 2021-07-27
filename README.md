@@ -10,7 +10,7 @@ This repository contains the following simple plugins:
 - Secret Generator:
     - Generates a manifest of kubernetes secret. You can specify the secret name, namespace and literals(key-value pairs)
       of the data field.
-- Line Insertions Transformer:
+- Line Insertion Transformer:
     - Inserts lines into base manifests. This plugin inserts specified strings above lines those include the anchor text. 
 
 Usage
