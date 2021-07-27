@@ -1,0 +1,8 @@
+apiVersion: hhiroshell.github.com/v1
+kind: LineInsertionTransformer
+metadata:
+  name: line-insertion-transformer
+argsOneLiner: |
+  --anchor "# insert here"
+  --auto-indent
+  --insertion piyo=hogera
