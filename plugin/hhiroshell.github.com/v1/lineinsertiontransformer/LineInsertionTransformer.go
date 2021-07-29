@@ -59,8 +59,8 @@ func run(_ *cobra.Command, _ []string) error {
 				re := regexp.MustCompile(`^\s*`)
 				indent = re.FindString(text)
 			}
-			for _, i := range insertions {
-				fmt.Fprintln(os.Stdout, indent+i)
+			for _, ins := range insertions {
+				fmt.Fprintln(os.Stdout, indent+ins)
 			}
 		}
 		fmt.Fprintln(os.Stdout, text)
