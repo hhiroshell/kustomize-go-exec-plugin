@@ -22,7 +22,7 @@ var (
 )
 
 func execute() {
-	rootCmd := &cobra.Command{
+	cmd := &cobra.Command{
 		Use:   "SecretGenerator",
 		Short: "Kustomize exec plugin that generates a kubernetes secret",
 		Long: `Kustomize exec plugin that generates a manifest of kubernetes secret written in yaml format.
@@ -30,13 +30,13 @@ You can specify the secret name, namespace and literals(key-value pairs) of the 
 		RunE: run,
 	}
 
-	rootCmd.Flags().StringVar(&name, "name", "", "Name of the generated Secret")
-	rootCmd.MarkFlagRequired("name")
-	rootCmd.Flags().StringVar(&namespace, "namespace", "default", "Namespace of the generated Secret")
-	rootCmd.Flags().StringArrayVar(&literals, "literal", nil, "Literal key-value pairs used as data of the Secret. (e.g. --literal key=value)")
-	rootCmd.MarkFlagRequired("literal")
+	cmd.Flags().StringVar(&name, "name", "", "Name of the generated Secret")
+	cmd.MarkFlagRequired("name")
+	cmd.Flags().StringVar(&namespace, "namespace", "default", "Namespace of the generated Secret")
+	cmd.Flags().StringArrayVar(&literals, "literal", nil, "Literal key-value pairs used as data of the Secret. (e.g. --literal key=value)")
+	cmd.MarkFlagRequired("literal")
 
-	err := rootCmd.Execute()
+	err := cmd.Execute()
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)

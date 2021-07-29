@@ -22,7 +22,7 @@ var (
 )
 
 func execute() {
-	rootCmd := &cobra.Command{
+	cmd := &cobra.Command{
 		Use:   "LineInsertionTransformer",
 		Short: "Kustomize exec plugin that inserts lines into base manifests",
 		Long: `Kustomize exec plugin that inserts lines into base manifests. This plugin inserts specified strings above
@@ -31,13 +31,13 @@ anchor text will be automatically added to string to be inserted.`,
 		RunE: run,
 	}
 
-	rootCmd.Flags().StringVar(&anchor, "anchor", "", "Insertions will be added above the lines those contains text specified by this flag")
-	rootCmd.MarkFlagRequired("anchor")
-	rootCmd.Flags().BoolVar(&autoIndent, "auto-indent", true, "Automatically add the same indentation as the anchor lines")
-	rootCmd.Flags().StringArrayVar(&insertions, "insertion", nil, "Lines you want to insert")
-	rootCmd.MarkFlagRequired("insertion")
+	cmd.Flags().StringVar(&anchor, "anchor", "", "Insertions will be added above the lines those contains text specified by this flag")
+	cmd.MarkFlagRequired("anchor")
+	cmd.Flags().BoolVar(&autoIndent, "auto-indent", true, "Automatically add the same indentation as the anchor lines")
+	cmd.Flags().StringArrayVar(&insertions, "insertion", nil, "Lines you want to insert")
+	cmd.MarkFlagRequired("insertion")
 
-	err := rootCmd.Execute()
+	err := cmd.Execute()
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
