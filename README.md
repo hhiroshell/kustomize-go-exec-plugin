@@ -1,6 +1,6 @@
 Kustomize Go Exec Plugin
 ===
-Sample kustomize exec plugins written in Go.
+Sample Kustomize exec plugins written in Go.
 
 Kustomize supports two types of plugins (Go / Exec), but the Go plugin is "[very annoying](https://github.com/kubernetes-sigs/kustomize/issues/3574)" because it is realized using the Go plugin system.
 This repository is trying to write some Kustomize exec plugins in Go.
@@ -8,17 +8,18 @@ This repository is trying to write some Kustomize exec plugins in Go.
 This repository contains the following simple plugins:
 
 - Secret Generator:
-    - Generates a manifest of kubernetes secret. You can specify the secret name, namespace and literals(key-value pairs)
+    - Generates a manifest of Kubernetes secret. You can specify the secret name, namespace, and literals(key-value pairs)
       of the data field.
 - Line Insertion Transformer:
-    - Inserts lines into base manifests. This plugin inserts specified strings above lines those include the anchor text. 
+    - Inserts lines into base manifests. This plugin inserts specified strings above lines that include the anchor text.
+
 
 Usage
 ---
 
 ### Build and Run
-First, you have to build Go binaries those will be used as Kustomize exec plugin.
-You can do it only by executing `make` job at the repository root dir.
+First, you have to build Go binaries that will be used as Kustomize exec plugin.
+You can do it only by executing the `make` job at the repository root dir.
 
 ```console
 $ git clone git@github.com:hhiroshell/kustomize-go-exec-plugin.git && cd kustomize-go-exec-plugin
@@ -32,14 +33,14 @@ Then, set the environment variable `KUSTOMIZE_PLUGIN_HOME` to the path of the `p
 $ export KUSTOMIZE_PLUGIN_HOME=$(pwd)/plugin
 ```
 
-Now, you can use the "SecretGenerator" sample plugin by executing the `kustomize` command as follows.
+Now, you can use the sample plugins by executing the `kustomize` command as follows.
 
 ```console
 $ kustomize build --enable-alpha-plugins example/secret-generator
 ```
 
 ### How to write the kustomization.yaml
-Sample plugin binaires can run as Go CLI commands. You can see all flags of plugins by executing `help` subcommands.
+Sample plugin binaries can run as Go CLI commands. So you can see all flags of plugins by executing with the `--help` flag.
 
 ```console
 $ plugin/hhiroshell.github.com/v1/secretgenerator/SecretGenerator --help
@@ -58,7 +59,7 @@ Flags:
 
 All options are available by writing them in the `argsOneLiner` field of the plugin’s configuration file referenced from kustomization.yaml.
 
-- plugin's configuration file (secret-generator.yaml)
+- plugin's configuration file (e.g. secret-generator.yaml)
 
 ```yaml
 apiVersion: hhiroshell.github.com/v1
