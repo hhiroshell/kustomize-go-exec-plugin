@@ -4,5 +4,7 @@ metadata:
   name: line-insertion-transformer
 argsOneLiner: |
   --anchor "# insert here"
+  --remove-anchor
   --auto-indent
   --insertion piyo=hogera
+  --insertion hogehoge=fugafuga

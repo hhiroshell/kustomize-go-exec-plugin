@@ -16,9 +16,10 @@ func main() {
 }
 
 var (
-	anchor     string
-	autoIndent bool
-	insertions []string
+	anchor       string
+	removeAnchor bool
+	autoIndent   bool
+	insertions   []string
 )
 
 func execute() {
@@ -36,6 +37,7 @@ anchor text will be automatically added to string to be inserted.`,
 	cmd.Flags().BoolVar(&autoIndent, "auto-indent", true, "Automatically add the same indentation as the anchor lines")
 	cmd.Flags().StringArrayVar(&insertions, "insertion", nil, "Lines you want to insert")
 	cmd.MarkFlagRequired("insertion")
+	cmd.Flags().BoolVar(&removeAnchor, "remove-anchor", false, "Remove the anchor line after inserting lines")
 
 	err := cmd.Execute()
 	if err != nil {
@@ -53,17 +55,23 @@ func run(_ *cobra.Command, _ []string) error {
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
 		text := scanner.Text()
-		if strings.Contains(text, anchor) {
-			var indent string
-			if autoIndent {
-				re := regexp.MustCompile(`^\s*`)
-				indent = re.FindString(text)
-			}
-			for _, ins := range insertions {
-				fmt.Fprintln(os.Stdout, indent+ins)
-			}
+		if !strings.Contains(text, anchor) {
+			fmt.Fprintln(os.Stdout, text)
+			continue
 		}
-		fmt.Fprintln(os.Stdout, text)
+
+		// insert
+		var indent string
+		if autoIndent {
+			re := regexp.MustCompile(`^\s*`)
+			indent = re.FindString(text)
+		}
+		for _, ins := range insertions {
+			fmt.Fprintln(os.Stdout, indent+ins)
+		}
+		if !removeAnchor {
+			fmt.Fprintln(os.Stdout, text)
+		}
 	}
 	if err := scanner.Err(); err != nil {
 		return err
